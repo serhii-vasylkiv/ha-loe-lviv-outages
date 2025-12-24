@@ -3,6 +3,5 @@
   "homeassistant": "2024.6.0",
   "country": "UA",
   "render_readme": true,
-  "zip_release": true,
-  "filename": "loe-lviv-outages.zip"
+  "icon": "mdi:lightning-bolt"
 }
