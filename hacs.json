@@ -2,6 +2,5 @@
   "name": "LOE Lviv Outages",
   "homeassistant": "2024.6.0",
   "country": "UA",
-  "render_readme": true,
-  "icon": "mdi:lightning-bolt"
+  "render_readme": true
 }
