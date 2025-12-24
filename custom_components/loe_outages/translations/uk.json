@@ -1,0 +1,63 @@
+{
+  "title": "LOE Львів Відключення",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Налаштування LOE Львів Відключення",
+        "data": {
+          "group": "Будь ласка, оберіть вашу групу:"
+        },
+        "data_description": {
+          "group": "Ви можете знайти свою групу на: https://poweron.loe.lviv.ua/"
+        }
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Налаштування LOE Львів Відключення",
+        "data": {
+          "group": "Будь ласка, оберіть вашу групу:"
+        },
+        "data_description": {
+          "group": "Ви можете знайти свою групу на: https://poweron.loe.lviv.ua/"
+        }
+      }
+    }
+  },
+
+  "device": {
+    "loe_lviv_outages": {
+      "name": "LOE Львів Група {group}"
+    }
+  },
+  "entity": {
+    "calendar": {
+      "outages": {
+        "name": "Календар відключень"
+      }
+    },
+    "sensor": {
+      "electricity": {
+        "name": "Електроенергія",
+        "state": {
+          "normal": "Підключено",
+          "outage": "Відключення"
+        }
+      },
+      "schedule_updated_on": {
+        "name": "Графік оновлено"
+      },
+      "next_outage": {
+        "name": "Наступне відключення"
+      },
+      "next_connectivity": {
+        "name": "Наступне підключення"
+      }
+    }
+  },
+  "common": {
+    "electricity_outage": "Відключення електроенергії"
+  }
+}

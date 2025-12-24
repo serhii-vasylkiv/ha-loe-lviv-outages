@@ -1,0 +1,11 @@
+{
+  "domain": "loe_lviv_outages",
+  "name": "LOE Lviv Outages",
+  "codeowners": ["@denysdovhan"],
+  "config_flow": true,
+  "documentation": "https://github.com/denysdovhan/ha-loe-lviv-outages",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/denysdovhan/ha-loe-lviv-outages",
+  "requirements": [],
+  "version": "0.0.0-unreleased"
+}

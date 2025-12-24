@@ -1,8 +1,8 @@
 {
-  "name": "Yasno Outages",
+  "name": "LOE Lviv Outages",
   "homeassistant": "2024.6.0",
   "country": "UA",
   "render_readme": true,
   "zip_release": true,
-  "filename": "yasno-outages.zip"
+  "filename": "loe-lviv-outages.zip"
 }

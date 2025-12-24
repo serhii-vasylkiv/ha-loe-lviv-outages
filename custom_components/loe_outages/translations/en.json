@@ -1,0 +1,63 @@
+{
+  "title": "LOE Lviv Outages",
+  "config": {
+    "step": {
+      "user": {
+        "title": "LOE Lviv Outages Settings",
+        "data": {
+          "group": "Please select your group:"
+        },
+        "data_description": {
+          "group": "You can find your group at: https://poweron.loe.lviv.ua/"
+        }
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "LOE Lviv Outages Settings",
+        "data": {
+          "group": "Please select your group:"
+        },
+        "data_description": {
+          "group": "You can find your group at: https://poweron.loe.lviv.ua/"
+        }
+      }
+    }
+  },
+
+  "device": {
+    "loe_lviv_outages": {
+      "name": "LOE Lviv Group {group}"
+    }
+  },
+  "entity": {
+    "calendar": {
+      "outages": {
+        "name": "Outages Calendar"
+      }
+    },
+    "sensor": {
+      "electricity": {
+        "name": "Electricity",
+        "state": {
+          "normal": "Connected",
+          "outage": "Outage"
+        }
+      },
+      "schedule_updated_on": {
+        "name": "Schedule Updated On"
+      },
+      "next_outage": {
+        "name": "Next Outage"
+      },
+      "next_connectivity": {
+        "name": "Next Connectivity"
+      }
+    }
+  },
+  "common": {
+    "electricity_outage": "Electricity Outage"
+  }
+}

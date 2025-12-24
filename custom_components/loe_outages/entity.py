@@ -1,14 +1,14 @@
-"""Yasno Outages entity."""
+"""LOE Lviv Outages entity."""
 
 from homeassistant.helpers.device_registry import DeviceEntryType, DeviceInfo
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from .const import DOMAIN
-from .coordinator import YasnoOutagesCoordinator
+from .coordinator import LoeOutagesCoordinator
 
 
-class YasnoOutagesEntity(CoordinatorEntity[YasnoOutagesCoordinator]):
-    """Common logic for Yasno Outages entity."""
+class LoeOutagesEntity(CoordinatorEntity[LoeOutagesCoordinator]):
+    """Common logic for LOE Lviv Outages entity."""
 
     _attr_has_entity_name = True
 
@@ -16,13 +16,11 @@ class YasnoOutagesEntity(CoordinatorEntity[YasnoOutagesCoordinator]):
     def device_info(self) -> DeviceInfo:
         """Return device information about this entity."""
         return DeviceInfo(
-            translation_key="yasno_outages",
+            translation_key="loe_lviv_outages",
             translation_placeholders={
-                "region": self.coordinator.region_name,
-                "provider": self.coordinator.provider_name,
                 "group": str(self.coordinator.group),
             },
             identifiers={(DOMAIN, self.coordinator.config_entry.entry_id)},
-            manufacturer="Yasno",
+            manufacturer="Львівобленерго",
             entry_type=DeviceEntryType.SERVICE,
         )

@@ -1,7 +1,7 @@
 [project]
-name = "ha-yasno-outages"
+name = "ha-loe-outages"
 version = "0.0.0"
-description = "Home Assistant custom component: Yasno Outages"
+description = "Home Assistant custom component: LOE Outages"
 readme = "readme.md"
 requires-python = ">=3.13.2"
 authors = [{ name = "Denys Dovhan", email = "denysdovhan@gmail.com" }]

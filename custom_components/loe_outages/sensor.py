@@ -1,4 +1,4 @@
-"""Calendar platform for Yasno outages integration."""
+"""Sensor platform for LOE Lviv outages integration."""
 
 import logging
 from collections.abc import Callable
@@ -20,26 +20,23 @@ from .const import (
     ATTR_EVENT_TYPE,
     STATE_NORMAL,
     STATE_OUTAGE,
-    STATE_STATUS_EMERGENCY_SHUTDOWNS,
-    STATE_STATUS_SCHEDULE_APPLIES,
-    STATE_STATUS_WAITING_FOR_SCHEDULE,
 )
-from .coordinator import YasnoOutagesCoordinator
-from .data import YasnoOutagesConfigEntry
-from .entity import YasnoOutagesEntity
+from .coordinator import LoeOutagesCoordinator
+from .data import LoeOutagesConfigEntry
+from .entity import LoeOutagesEntity
 
 LOGGER = logging.getLogger(__name__)
 
 
 @dataclass(frozen=True, kw_only=True)
-class YasnoOutagesSensorDescription(SensorEntityDescription):
-    """Yasno Outages entity description."""
+class LoeOutagesSensorDescription(SensorEntityDescription):
+    """LOE Outages entity description."""
 
-    val_func: Callable[[YasnoOutagesCoordinator], Any]
+    val_func: Callable[[LoeOutagesCoordinator], Any]
 
 
-SENSOR_TYPES: tuple[YasnoOutagesSensorDescription, ...] = (
-    YasnoOutagesSensorDescription(
+SENSOR_TYPES: tuple[LoeOutagesSensorDescription, ...] = (
+    LoeOutagesSensorDescription(
         key="electricity",
         translation_key="electricity",
         icon="mdi:transmission-tower",
@@ -47,28 +44,21 @@ SENSOR_TYPES: tuple[YasnoOutagesSensorDescription, ...] = (
         options=[STATE_NORMAL, STATE_OUTAGE, STATE_UNKNOWN],
         val_func=lambda coordinator: coordinator.current_state,
     ),
-    YasnoOutagesSensorDescription(
-        key="next_planned_outage",
-        translation_key="next_planned_outage",
+    LoeOutagesSensorDescription(
+        key="next_outage",
+        translation_key="next_outage",
         icon="mdi:calendar-remove",
         device_class=SensorDeviceClass.TIMESTAMP,
-        val_func=lambda coordinator: coordinator.next_planned_outage,
+        val_func=lambda coordinator: coordinator.next_outage,
     ),
-    YasnoOutagesSensorDescription(
-        key="next_probable_outage",
-        translation_key="next_probable_outage",
-        icon="mdi:calendar-question",
-        device_class=SensorDeviceClass.TIMESTAMP,
-        val_func=lambda coordinator: coordinator.next_probable_outage,
-    ),
-    YasnoOutagesSensorDescription(
+    LoeOutagesSensorDescription(
         key="next_connectivity",
         translation_key="next_connectivity",
         icon="mdi:calendar-check",
         device_class=SensorDeviceClass.TIMESTAMP,
         val_func=lambda coordinator: coordinator.next_connectivity,
     ),
-    YasnoOutagesSensorDescription(
+    LoeOutagesSensorDescription(
         key="schedule_updated_on",
         translation_key="schedule_updated_on",
         icon="mdi:update",
@@ -76,59 +66,31 @@ SENSOR_TYPES: tuple[YasnoOutagesSensorDescription, ...] = (
         entity_category=EntityCategory.DIAGNOSTIC,
         val_func=lambda coordinator: coordinator.schedule_updated_on,
     ),
-    YasnoOutagesSensorDescription(
-        key="status_today",
-        translation_key="status_today",
-        icon="mdi:calendar-today",
-        device_class=SensorDeviceClass.ENUM,
-        options=[
-            STATE_STATUS_SCHEDULE_APPLIES,
-            STATE_STATUS_WAITING_FOR_SCHEDULE,
-            STATE_STATUS_EMERGENCY_SHUTDOWNS,
-            STATE_UNKNOWN,
-        ],
-        entity_category=EntityCategory.DIAGNOSTIC,
-        val_func=lambda coordinator: coordinator.status_today,
-    ),
-    YasnoOutagesSensorDescription(
-        key="status_tomorrow",
-        translation_key="status_tomorrow",
-        icon="mdi:calendar",
-        device_class=SensorDeviceClass.ENUM,
-        options=[
-            STATE_STATUS_SCHEDULE_APPLIES,
-            STATE_STATUS_WAITING_FOR_SCHEDULE,
-            STATE_STATUS_EMERGENCY_SHUTDOWNS,
-            STATE_UNKNOWN,
-        ],
-        entity_category=EntityCategory.DIAGNOSTIC,
-        val_func=lambda coordinator: coordinator.status_tomorrow,
-    ),
 )
 
 
 async def async_setup_entry(
     hass: HomeAssistant,  # noqa: ARG001
-    config_entry: YasnoOutagesConfigEntry,
+    config_entry: LoeOutagesConfigEntry,
     async_add_entities: AddEntitiesCallback,
 ) -> None:
-    """Set up the Yasno outages calendar platform."""
+    """Set up the LOE Lviv outages sensor platform."""
     LOGGER.debug("Setup new entry: %s", config_entry)
     coordinator = config_entry.runtime_data.coordinator
     async_add_entities(
-        YasnoOutagesSensor(coordinator, description) for description in SENSOR_TYPES
+        LoeOutagesSensor(coordinator, description) for description in SENSOR_TYPES
     )
 
 
-class YasnoOutagesSensor(YasnoOutagesEntity, SensorEntity):
-    """Implementation of connection entity."""
+class LoeOutagesSensor(LoeOutagesEntity, SensorEntity):
+    """Implementation of LOE outages sensor entity."""
 
-    entity_description: YasnoOutagesSensorDescription
+    entity_description: LoeOutagesSensorDescription
 
     def __init__(
         self,
-        coordinator: YasnoOutagesCoordinator,
-        entity_description: YasnoOutagesSensorDescription,
+        coordinator: LoeOutagesCoordinator,
+        entity_description: LoeOutagesSensorDescription,
     ) -> None:
         """Initialize the sensor."""
         super().__init__(coordinator)

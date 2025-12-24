@@ -1,4 +1,4 @@
-"""Data models for Yasno outages API."""
+"""Data models for LOE Lviv outages API."""
 
 import datetime
 from dataclasses import dataclass
@@ -9,14 +9,6 @@ class OutageEventType(StrEnum):
     """Outage event types."""
 
     DEFINITE = "Definite"
-    NOT_PLANNED = "NotPlanned"
-
-
-class OutageSource(StrEnum):
-    """Source type for outage events."""
-
-    PLANNED = "planned"
-    PROBABLE = "probable"
 
 
 @dataclass(frozen=True)
@@ -26,7 +18,6 @@ class OutageEvent:
     event_type: OutageEventType
     start: datetime.datetime
     end: datetime.datetime
-    source: OutageSource
 
 
 @dataclass(frozen=True)

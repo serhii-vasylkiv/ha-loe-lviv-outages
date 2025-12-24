@@ -59,8 +59,8 @@
   },
 
   "device": {
-    "yasno_outages": {
-      "name": "Yasno {region} {provider} {group}"
+    "loe_outages": {
+      "name": "LOE {group}"
     }
   },
   "entity": {
